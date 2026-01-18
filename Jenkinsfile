@@ -8,7 +8,11 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'npm install'
+        sh '''
+          node -v
+          npm -v
+          npm install
+        '''
       }
     }
 
@@ -25,4 +29,3 @@ pipeline {
     }
   }
 }
-
