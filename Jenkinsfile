@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node18'
+    }
+
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
         S3_BUCKET = 'frontend-static-f31323b8'
@@ -9,16 +13,11 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/barik-bijayalaxmi/Frontend-DevOps-.git'
-            }
-        }
-
         stage('Build Frontend') {
             steps {
                 sh '''
+                  node -v
+                  npm -v
                   chmod +x build.sh
                   ./build.sh
                 '''
@@ -27,7 +26,7 @@ pipeline {
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {
-                withCredentials([[
+                withCredentials([[ 
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-credentials'
                 ]]) {
@@ -42,3 +41,4 @@ pipeline {
         }
     }
 }
+
