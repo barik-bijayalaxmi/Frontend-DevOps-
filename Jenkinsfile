@@ -1,31 +1,44 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {
-    nodejs 'node18'
-  }
-
-  stages {
-    stage('Install') {
-      steps {
-        sh '''
-          node -v
-          npm -v
-          npm install
-        '''
-      }
+    environment {
+        AWS_DEFAULT_REGION = 'us-east-1'
+        S3_BUCKET = 'frontend-static-f31323b8'
+        CLOUDFRONT_DISTRIBUTION_ID = 'E1II3MN5PP1CLD'
     }
 
-    stage('Build') {
-      steps {
-        sh 'echo "Static frontend build completed"'
-      }
-    }
+    stages {
 
-    stage('Deploy') {
-      steps {
-        echo 'Deploy to S3 + CloudFront'
-      }
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/barik-bijayalaxmi/Frontend-DevOps-.git'
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                sh '''
+                  chmod +x build.sh
+                  ./build.sh
+                '''
+            }
+        }
+
+        stage('Deploy to S3 & Invalidate CloudFront') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-credentials'
+                ]]) {
+                    sh '''
+                      aws s3 sync build/ s3://$S3_BUCKET --delete
+                      aws cloudfront create-invalidation \
+                        --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+                        --paths "/*"
+                    '''
+                }
+            }
+        }
     }
-  }
 }
