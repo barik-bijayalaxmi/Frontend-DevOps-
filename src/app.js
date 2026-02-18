@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://api.theawsn.shop"; 
+const API_BASE_URL = "http://api.theawsn.shop:4000"; 
 // Change to https://mbry.digital when deployed
  
 // ================= REGISTER =================
