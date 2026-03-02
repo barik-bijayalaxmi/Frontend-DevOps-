@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://api.theawsn.shop";
+const API_BASE_URL = "http://api.theawsn.shop";
 
 async function registerUser() {
   const name = document.getElementById("regName").value;
