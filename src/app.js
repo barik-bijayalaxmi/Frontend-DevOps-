@@ -1,6 +1,6 @@
-
 const API_BASE_URL = "https://api.theawsn.shop";
 
+// ================= REGISTER =================
 async function registerUser() {
   const name = document.getElementById("regName").value;
   const email = document.getElementById("regEmail").value;
@@ -22,4 +22,4 @@ async function registerUser() {
   } catch (error) {
     console.error("Full error:", error);
   }
-} 
+}
