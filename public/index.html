@@ -85,9 +85,25 @@ pre {
     border-radius: 10px;
     text-align: left;
     overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
+
 hr {
     border: 1px solid rgba(255,255,255,0.2);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: rgba(255,255,255,0.1);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
 }
 </style>
 
@@ -122,7 +138,11 @@ hr {
 
 <hr>
 
+<h3>Result:</h3>
 <pre id="result"></pre>
+
+<h3>Orders List:</h3>
+<ul id="order-list"></ul>
 
 </div>
 
