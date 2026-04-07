@@ -16,6 +16,9 @@ https://github.com/barik-bijayalaxmi/Backend-DevOps/tree/main/user-service
 3️⃣ Order Service Repository
 https://github.com/barik-bijayalaxmi/Backend-DevOps-order-/tree/main/order-service
 
+4️⃣ Terraform Repository
+https://github.com/barik-bijayalaxmi/terraform-devops
+
 ## 🌍 Live Demo
 Domains are configured using Amazon Route 53.
 ⚠️ Live demo is currently offline(https://frontend.theawsn.shop). AWS resources were removed to stop billing charges. Screenshots of the deployment are included as proof.
